@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index | Page</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-v0Cgs4XrsuVxyAZLF9lP6/FbOu3iHUAe8GfXFIJzAZVJBSlNb8MqC3YZB+5zh7iLc+NcA4gRpxry1i2WMJm1jA=="
+        crossorigin="anonymous" />
+
+</head>
+<style>
+    @font-face {
+        font-family: 'Vibur';
+        font-style: normal;
+        font-weight: 400;
+        src: url(https://fonts.gstatic.com/s/vibur/v23/DPEiYwmEzw0QRgTuJD4.ttf) format('truetype');
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: arial;
+        color: #666666;
+    }
+
+    .link {
+        cursor: pointer;
+    }
+
+    body {
+        background: url("https://res.cloudinxary.com/dtk2o5pc4/image/upload/v1470238639/bg1_mg97hp.jpg") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        overflow: hidden;
+    }
+
+    body .container {
+        width: 400px;
+        background-color: rgba(255, 255, 255, 0.9);
+        box-shadow: 1px 4px 4px 2px rgba(0, 0, 0, 0.5);
+        margin: 50px auto;
+        padding-top: 10px;
+        padding-bottom: 30px;
+        position: relative;
+        -webkit-transition: transform 0.5s ease;
+        transition: transform 0.5s ease;
+        -webkit-animation: page-down 1s;
+        /* Safari 4+ */
+        -moz-animation: page-down 1s;
+        /* Fx 5+ */
+        -o-animation: page-down 1s;
+        /* Opera 12+ */
+        animation: page-down 1s;
+        /* IE 10+, Fx 29+ */
+    }
+
+    body .container.close {
+        display: none;
+    }
+
+    body .container h1 {
+        font-family: "Vibur";
+        font-size: 50px;
+        text-align: center;
+        margin: 25px 0;
+        color: #4d4d4d;
+    }
+
+    body .container .close-button {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+    }
+
+    body .container .close-button i {
+        color: #4d4d4d;
+        padding: 10px;
+    }
+
+    body .container .form-set {
+        padding: 25px;
+        max-width: 320px;
+        margin: auto;
+    }
+
+    body .container .form-set .form-group {
+        position: relative;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #b3b3b3;
+    }
+
+    body .container .form-set .form-group .form-label {
+        position: absolute;
+        -webkit-transition: 0.15s all ease;
+        transition: 0.15s all ease;
+    }
+
+    body .container .form-set .form-group .form-label.on-focus,
+    body .container .form-set .form-group .form-label.filled {
+        font-size: 10px;
+        top: -10px;
+        -webkit-transition: 0.15s all ease;
+        transition: 0.15s all ease;
+    }
+
+    body .container .form-set .form-group .form-control {
+        height: 25px;
+        padding: 5px;
+        position: relative;
+        z-index: 2;
+        border: none;
+        background-color: transparent;
+        width: 100%;
+    }
+
+    body .container .form-set .form-group .form-control:focus {
+        outline: -webkit-focus-ring-color auto 0px;
+    }
+
+    body .container .form-set .btn {
+        width: 100%;
+        height: 40px;
+        border: 1px solid #808080;
+        border-radius: 30px;
+        background-color: transparent;
+        font-size: 16px;
+        margin: 15px 0;
+        cursor: pointer;
+    }
+
+    body .container .form-set .btn:focus {
+        outline: -webkit-focus-ring-color auto 0px;
+    }
+
+    body .container .login-with .title {
+        padding-bottom: 5px;
+        padding-left: 15px;
+        border-bottom: 1px solid #b3b3b3;
+    }
+
+    body .container .login-with .social .icons {
+        text-align: center;
+    }
+
+    body .container .login-with .social .icons .icon {
+        list-style-type: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 40px;
+        line-height: 40px;
+        color: #f2f2f2;
+        background-color: #4d4d4d;
+        display: inline-block;
+        vertical-align: middle;
+        margin: 20px 5px;
+        cursor: pointer;
+    }
+
+    body .container .login-with .social .icons .icon i {
+        color: #f2f2f2;
+    }
+
+    body .container .other-links div {
+        padding-left: 15px;
+        cursor: pointer;
+        font-size: 12px;
+    }
+
+    body .container .other-links div:hover {
+        text-decoration: underline;
+    }
+
+    @-moz-keyframes page-down {
+        0% {
+            -webkit-transform: translateY(-200px);
+            transform: translateY(-200px);
+            opacity: 0;
+        }
+
+        100% {
+            -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+            opacity: 1;
+        }
+    }
+
+    @-o-keyframes page-down {
+        0% {
+            -webkit-transform: translateY(-200px);
+            transform: translateY(-200px);
+            opacity: 0;
+        }
+
+        100% {
+            -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+            opacity: 1;
+        }
+    }
+
+    @keyframes page-down {
+        0% {
+            -webkit-transform: translateY(-200px);
+            transform: translateY(-200px);
+            opacity: 0;
+        }
+
+        100% {
+            -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+            opacity: 1;
+        }
+    }
+</style>
+
+<body>
+    <div id="login-page" class="container open">
+        {% if error_message %}
+          <h6 style="color: red;">{{ error_message }}</h6>
+          {% endif %}
+        <form method="post" action="{% url 'admin_login_fun' %}">
+            {% csrf_token %}
+            <h1>Admin Login</h1>
+            <div class="form-set">
+                <div class="form-group">
+                    <label class="form-label">User Name</label>
+                    <input type="text" class="form-control" name="username" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password" />
+                </div>
+                <button class="btn" type="submit" >Log in</button>
+            </div>
+            
+            <div class="other-links">
+                <div>
+                    <div class="link" data-close="login-page" data-open="new-account-page">Employee Login</div>
+                </div> <br>
+                <div>
+                    <div class="link" data-close="login-page" data-open="forgot-pass-page">Manager Login</div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="new-account-page" class="container close">
+        <form action="" method="post">
+            <h1>Employee Login</h1>
+            <div class="form-set">
+                <div class="form-group">
+                    <label class="form-label">User Name</label>
+                    <input type="text" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" />
+                </div>
+                <button class="btn">Log in</button>
+            </div>
+            
+            <div class="other-links">
+                <div>
+                    <a class="link" href="{% url 'Index_function' %}"><div class="link">Back</div></a>
+                </div>
+            </div>
+
+            
+        </form>
+    </div>
+
+    <div id="forgot-pass-page" class="container close">
+        <form action="" method="post">
+            <h1>Manager Login</h1>
+            <div class="form-set">
+                <div class="form-group">
+                    <label class="form-label">User Name</label>
+                    <input type="text" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" />
+                </div>
+                <button class="btn">Log in</button>
+            </div>
+            
+            <div class="other-links">
+                <div>
+                    <a class="link" href="{% url 'Index_function' %}"><div class="link">Back</div></a>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    "use strict";
+    var $ = jQuery;
+    class onFocus {
+        constructor() {
+            var $this = this;
+            $this.run = $this.init();
+        }
+        init() {
+            var $this = this;
+            $(document).ready(function () {
+                $this.addFocusClass();
+                $this.keyUpObserve();
+                $this.clickLink();
+            });
+            return 0;
+        }
+        addFocusClass() {
+            $(".form-control")
+                .focus(function () {
+                    $(this).prev().addClass("on-focus");
+                })
+                .focusout(function () {
+                    $(".form-label").removeClass("on-focus");
+                });
+        }
+        keyUpObserve() {
+            $(".form-control").keyup(function () {
+                if ($(this).val().length > 0) {
+                    $(this).prev().addClass("filled");
+                }
+                else {
+                    $(this).prev().removeClass("filled");
+                }
+            });
+        }
+        clickLink() {
+            $(".link").click(function () {
+                var open = $(this).data("open");
+                var close = $(this).data("close");
+                $("#" + close).animate({
+                    opacity: 0,
+                    top: +100
+                }, 500, function () {
+                    $(this).removeClass("open").addClass("close").removeAttr("style");
+                    $("#" + open)
+                        .removeClass("close")
+                        .addClass("open");
+                });
+            });
+        }
+    }
+    var run = new onFocus();
+
+</script>
+
+</html>

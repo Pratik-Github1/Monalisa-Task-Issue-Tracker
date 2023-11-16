@@ -1,0 +1,97 @@
+{% extends "admin/admin_dashboard.html" %}
+{% block content %}
+
+<div class="card bg-light-info shadow-none position-relative overflow-hidden">
+    <div class="card-body px-4 py-3">
+      <div class="row align-items-center">
+        <div class="col-9">
+          <h4 class="fw-semibold mb-8">Sub Admin Updation (Update Correct Details)</h4>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a class="text-muted" href="{% url 'admin_dashboard' %}">Dashboard</a></li>
+              <li class="breadcrumb-item" aria-current="page">Sub Admins</li>
+              <li class="breadcrumb-item" aria-current="page">Update Subadmin</li>
+            </ol>
+          </nav>
+        </div>
+        <div class="col-3">
+          <div class="text-center mb-n5">
+           
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="card bg-light shadow position-relative overflow-hidden">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <span>Update Sub Admin</span>
+        <a href="{% url 'list_subadmins' %}">Back</a>
+    </div>
+
+    <form id="subadminUpdateForm" method="post">
+        {% csrf_token %}
+        <div class="card-body px-4 py-3">
+            <div class="row mt-2">
+
+                <div class="col-md-6">
+                    <label for="employee_name">Enter Employee Name : </label>
+                    <input type="text" class="form-control" name="employee_name" id="employee_name" value="{{ subadmin.user.first_name }}">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="employee_email">Enter Email : </label>
+                    <input type="email" class="form-control" name="employee_email" id="employee_email" value="{{ subadmin.user.email }}">
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <label for="username">Enter User Name : </label>
+                    <input type="text" class="form-control" name="username" id="username" value="{{ subadmin.user.username }}">
+                </div>
+                <div class="col-md-6">
+                    <label for="password">Enter Password : </label>
+                    <input type="password" class="form-control" placeholder="Can Not Change/modify Password" disabled>
+                </div>
+            </div>
+
+            <div class="row mt-5 mr-3">
+                <div class="col text-left">
+                    <button class="btn btn-success" type="submit">Update</button>
+                </div>
+            </div>
+            
+        </div>
+    </form>
+    <script>
+      $(document).ready(function () {
+          $("#subadminUpdateForm").submit(function (event) {
+              event.preventDefault();
+              var form = $(this);
+      
+              $.ajax({
+                  type: form.attr('method'),
+                  url: form.attr('action'),
+                  data: form.serialize(),
+                  success: function (data) {
+                      if (data.success) {
+                          swal("Success", data.message, "success")
+                              .then(function () {
+                                  location.reload();
+                              });
+                      } else {
+                          swal("Error", data.message, "error");
+                      }
+                  },
+                  error: function (xhr, status, error) {
+                      swal("Error", "An error occurred while processing your request.", "error");
+                  }
+              });
+          });
+      });
+    </script>
+      
+      
+  </div>
+{% endblock content %}

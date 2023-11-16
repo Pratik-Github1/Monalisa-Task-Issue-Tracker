@@ -1,0 +1,172 @@
+{% extends "admin/admin_dashboard.html" %}
+{% block content %}
+<section class="datatables table-responsive p-3 shadow">
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-striped table-bordered border text-inputs-searching text-nowrap">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Status</th>
+            <th>Created By</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in subadmins %}
+          <tr>
+            <td>{{ i.user.first_name }}</td>
+            <td>{{ i.user.email }}</td>
+            <td>{{ i.user.username }}</td>
+            <td>
+              {% if i.user.is_active %}
+                <span class="text-success"><i class="fas fa-check-circle"></i>Active</span>
+              {% else %}
+                <span class="text-danger"><i class="fas fa-times-circle"></i>Inactive</span>
+              {% endif %}
+            </td>
+            <td>{{ i.created_by }}</td>
+            <td>
+              <div class="d-flex align-items-center p-2">
+                <a href="{% url 'edit_sub_admin_details' i.id %}">
+                <i class="fas fa-edit fs-5 text-primary" style="cursor: pointer;" title="edit"></i></a> &nbsp; &nbsp;
+
+                {% if i.user.is_active %}
+                  <a href="#" class="deactivate-link" data-record-id="{{ i.id }}">
+                    <i class="fas fa-ban fs-5 text-danger" style="cursor: pointer;" title="Deactivate account"></i>
+                  </a>
+                {% else %}
+                  <a href="#" class="activate-link" data-record-id="{{ i.id }}">
+                    <i class="fas fa-check-circle fs-5 text-success" style="cursor: pointer;" title="Activate account"></i>
+                  </a>
+                {% endif %}
+
+            </div>
+            
+          </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Status</th>
+            <th>Created_by</th>
+            <th style="display: none;"></th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  $(document).ready(function() {
+    $(".table").on("click", ".deactivate-link", function() {
+        const recordId = $(this).data("record-id");
+
+        Swal.fire({
+            icon: 'question',
+            title: 'Confirm Deactivation',
+            text: 'Are you sure you want to deactivate this account?',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, deactivate it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'deactivate_sub_admin_account' %}",
+                    data: {
+                        record_id: recordId,
+                        csrfmiddlewaretoken: "{{ csrf_token }}"
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Deactivation',
+                                text: 'The user has been deactivated successfully!',
+                            }).then(() => {
+                                location.reload();
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: response.message,  // Display the message from the server.
+                            });
+                        }
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'An error occurred: ' + errorThrown,
+                        });
+                    }
+                });
+            }
+        });
+    });
+
+    $(".table").on("click", ".activate-link", function() {
+      const recordId = $(this).data("record-id");
+
+      Swal.fire({
+          icon: 'question',
+          title: 'Confirm Activation',
+          text: 'Are you sure you want to activate this account?',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, active it!',
+          cancelButtonText: 'Cancel'
+      }).then((result) => {
+          if (result.isConfirmed) {
+              $.ajax({
+                  type: "POST",
+                  url: "{% url 'activate_sub_admin_account' %}",
+                  data: {
+                      record_id: recordId,
+                      csrfmiddlewaretoken: "{{ csrf_token }}"
+                  },
+                  success: function(response) {
+                      if (response.success) {
+                          Swal.fire({
+                              icon: 'success',
+                              title: 'Activation',
+                              text: 'The user has been activated successfully!',
+                          }).then(() => {
+                              location.reload();
+                          });
+                      } else {
+                          Swal.fire({
+                              icon: 'error',
+                              title: 'Error',
+                              text: response.message,
+                          });
+                      }
+                  },
+                  error: function(xhr, textStatus, errorThrown) {
+                      Swal.fire({
+                          icon: 'error',
+                          title: 'Error',
+                          text: 'An error occurred: ' + errorThrown,
+                      });
+                  }
+              });
+          }
+      });
+  });
+
+    
+});
+
+</script>
+</section>
+
+{% endblock content %}
+
